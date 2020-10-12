@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width= device-width, initial-scale=1.0">
+	<title>Form Validation</title>
+</head>
+<body>
+		<fieldset>
+			<legend>User Registration</legend>
+			<form name="RegistrationForm" onsubmit="return validForm()" onchange="return validForm()" method="post">
+				<div>
+					<label>Name:</label><br>
+					<input type="text" name="name" placeholder="Enter Name">
+					<span id="incorrectnameinput"><b>compulsory</b></span>
+				</div>
+				<br>
+				<br>
+				<div>
+					<label>Email:</label><br>
+					<input type="email" name="email" placeholder="Enter Email">
+					<span id="incorrectemail"><b>compulsory</b></span>
+				</div>
+				<br>
+				<br>
+				<div>
+					<label>Password:</label><br>
+					<input type="password" name="password" placeholder="Enter Name">
+					<span id="incorrectpassword"><b>compulsory</b></span>
+				</div>
+				<br>
+				<br>
+				<div>
+					<label>Confirm Password:</label><br>
+					<input type="password" name="confirmpassword" placeholder="Enter Email">
+					<span id="incorrectconfirmpassword"><b>compulsory</b></span>
+				</div>
+				<br>
+				<br>
+				<div>
+					<label>Date of Birth:</label><br>
+					<input type="date" name="dateOfBirth" placeholder="Enter DateOfBirth">
+					<span id="incorrectDOB"><b>compulsory</b></span>
+				</div>
+				<br>
+				<br>
+				<button><a href="formconfirm.html">Submit</a></button>
+			</form>
+		</fieldset>
+
+		<script type="text/javascript">
+			function validForm() {
+				let name = document.forms["RegistrationForm"]["name"].value;
+				let email = document.forms["RegistrationForm"]["email"].value;
+				let password = document.forms["RegistrationForm"]["password"].value;
+				let confirmpassword = document.forms["RegistrationForm"]["confirmpassword"].value;
+				let dateOfBirth = document.forms["RegistrationForm"]["dateOfBirth"].value;
+				let alphabets =  /^[A-Za-z ]+$/;
+				let atpos = email.indexOf("@");
+				let dotpos = email.lastIndexOf(".");
+
+				if (name == "" || name == null) {
+					//alert("please fill in")
+					document.getElementById("incorrectnameinput").style.color = "red"
+				document.getElementById("incorrectnameinput").innerHTML = "Name is <b> compulsory </b>";
+				return false;
+			}else if (!(name.match(alphabets))) {
+				document.getElementById("incorrectnameinput").innerHTML = "<b> Only alphabets </b> are allowed";
+				document.getElementById("incorrectnameinput").style.color = "red"
+				return false;
+			}else if(name.length < 3 ){
+				document.getElementById("incorrectnameinput").innerHTML = "Name <b> must</b> be a <b>minimum of 3 letters</b>";
+				return false;
+			}else if(email == "" || email == null) {
+				document.getElementById("incorrectnameinput").innerHTML = "Correct"
+				document.getElementById("incorrectnameinput").style.color = "green"
+				document.getElementById("incorrectemail").innerHTML = "Email is <b>compulsory</b>";
+				return false;
+			}else if(atpos < 1 || (dotpos - atpos < 2)){
+				document.getElementById("incorrectemail").innerHTML = "Fill in rightly"
+				//document.RegistrationForm.EMail.focus() ;
+				return false;
+			}else if (password == "" || password == null) {
+				//document.getElementById("incorrectemail").innerHTML = "Correct"
+				//document.getElementById("incorrectemail").style.color = "green"
+				document.getElementById("incorrectpassword").innerHTML = "Password is <b>compulsory</b>";
+				return false;
+			}else if(password.length < 8 ){
+				document.getElementById("incorrectpassword").innerHTML = "Password <b>must</b> be a <b>minimum of 8</b>";
+				return false;
+			}else if(confirmpassword !=password){
+				document.getElementById("incorrectpassword").innerHTML = "Correct"
+				document.getElementById("incorrectpassword").style.color = "green"
+				document.getElementById("incorrectconfirmpassword").innerHTML = "password confirmation";
+				return false;
+			}else if (dateOfBirth == "" || dateOfBirth == null) {
+				document.getElementById("incorrectconfirmpassword").innerHTML = "Correct"
+				document.getElementById("incorrectconfirmpassword").style.color = "green"
+				document.getElementById("incorrectDOB").innerHTML = "Date Of Birth is <b>compulsory</b>";
+				return false;
+			}else{
+				alert("succcess")
+			}		
+			
+		}
+			
+		</script>
+	
+
+</body>
+</html>
